@@ -1,4 +1,3 @@
-
 /****************************************************************************** 
  *  Purpose: to create various methods in utility class.
  *
@@ -8,22 +7,27 @@
  *
  ******************************************************************************/
 package com.bridgelabz.util;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Utility {
 
-	static int choice, size, elementFound;
+	static int choice, size;
 	static Scanner scanner = new Scanner(System.in);
+	static long startTime,stopTime;
+	static int timeArray[] = new int[6];
+	static int elapseTime;
 	
-	public static int binarySearchForInt()
+	/*
+	 * method for searching an integer element using binary search
+	 */
+	public int binarySearchForInt(int intarray[],int size)
 	{
-		System.out.println("enter size of array");
-		size = scanner.nextInt();
-		int intarray[] = new int[size];
-		
+		int elementFound=0;
+		startTime = System.currentTimeMillis();	
+		System.out.println("this is binary searching of integer");
 		System.out.println("enter integer elements");
+		
 		for(int i=0; i<size; i++)
 		{
 			intarray[i]=scanner.nextInt();
@@ -34,10 +38,10 @@ public class Utility {
 		for(int i:intarray)
 		{
 			System.out.print(i);
-			System.out.println();
+			System.out.print(" ");
 		}
 		
-		
+		System.out.println();
 		System.out.println("enter a value to be searched");
 		int search = scanner.nextInt();
 		
@@ -46,45 +50,53 @@ public class Utility {
 		int mid = (min + max) /2;
 		
 		
-		if(search < intarray[max] && search > intarray[min])
+		if(search <= intarray[max] && search >= intarray[min])
 		{
 		while(elementFound != 1)
 		{
 			
-		if(search == intarray[mid])
-		{
-			//System.out.println("your element is at index "+mid);
-			elementFound = 1;	
-		}
-		
-		else if (search < intarray[mid])
-		{
-		max = mid-1;
-		mid = (min+max)/2;	
+			if(search == intarray[mid])
+			{
+				System.out.println("your element is at index "+mid);
+				System.out.println();
+				elementFound = 1;	
+			}
+			
+			else if (search < intarray[mid])
+			{
+				max = mid-1;
+				mid = (min+max)/2;	
+			}
+			
+			else
+			{
+				min = mid+1;
+				mid = (min + max) /2;
+			}
+			}	
 		}
 		
 		else
 		{
-		min = mid+1;
-		mid = (min + max) /2;
-		}
-		}
-		
-		}
-		
-		else
-		{
-			int found = 0;
-			System.out.println("element not present in this list");
+			System.out.println("element not present in this list \n");
 			return mid;
 		}
+		System.out.println();
+		stopTime = System.currentTimeMillis();	
+		elapseTime= (int) (stopTime - startTime);
+		timeArray[0] = elapseTime;
 		return mid;
-		
 	}
 	
 	
-	public static void binarySearchForString(String stringarray[])
+	/*
+	 * method for searching a string element using binary search
+	 */
+	public void binarySearchForString(String stringarray[],int size)
 	{
+		int elementFound=0;
+		startTime = System.currentTimeMillis();	
+		System.out.println("this is binary searching of string");
 		System.out.println("enter string elements");
 		for(int i=0; i<size; i++)
 		{
@@ -92,10 +104,14 @@ public class Utility {
 		}
 		
 		Arrays.sort(stringarray);
+		
 		for(int j=0; j<size; j++)
 		{
-		System.out.println(stringarray[j]);
+		System.out.print(stringarray[j]);
+		System.out.print(" ");
 		}
+		
+		System.out.println();
 		System.out.println("enter the element to be searched");
 		String search = scanner.next();
 		
@@ -103,41 +119,47 @@ public class Utility {
 		int max = stringarray.length - 1;
 		int mid = (min + max) /2;
 		
-		if((search.compareTo(stringarray[max])<0) & (search.compareTo(stringarray[min])>0))
+		if((search.compareTo(stringarray[max])<=0) && (search.compareTo(stringarray[min])>=0))
 		{
 		while(elementFound != 1)
 		{
-		if(search.compareTo(stringarray[mid])==0)
-		{
-			System.out.println("element found at "+mid);
-			elementFound = 1;
+			if(search.compareTo(stringarray[mid])==0)
+			{
+				System.out.println("element found at "+mid);
+				elementFound = 1;
+				
+			}
+			else if(search.compareTo(stringarray[mid]) > 0)
+			{
+				min = mid+1;
+				mid = (min+max)/2;
+			}
 			
-		}
-		else if(search.compareTo(stringarray[mid]) < 0)
-		{
-			max = mid-1;
-			mid = (min+max)/2;
-		}
-		
-		else
-		{
-			min = mid +1;
-			mid = (min+max)/2;
-		}
-		}
+			else
+			{
+				max = mid -1;
+				mid = (min+max)/2;
+			}
+			}
 		}
 		
 		else
 		{
-		System.out.println(search + " is not present in the list.\n");
+			System.out.println(search + " is not present in the list.\n");
 		}
-		
-	
-		
+		stopTime = System.currentTimeMillis();	
+		elapseTime= (int) (stopTime - startTime);
+		timeArray[1] = elapseTime;	
 	}
 	
-	public static void insertionForInt(int intarray[])
+	
+	/*
+	 * to sort the integer elements using insertion sort
+	 */
+	public void insertionForInt(int intarray[],int size)
 	{
+	startTime = System.currentTimeMillis();	
+	System.out.println("this is insertion sort for integer elements");
 	System.out.println("enter elements");
 	for(int i=0;i<size;i++)
 	{
@@ -157,15 +179,26 @@ public class Utility {
 		}
 	}
 	
+	System.out.println("sorted elements are ");
 	for(int i=0; i<size;i++)		
 	{
 		System.out.print(intarray[i]);
 		System.out.print(" ");
 	}
+	System.out.println();
+	stopTime = System.currentTimeMillis();	
+	elapseTime= (int) (stopTime - startTime);
+	timeArray[2] = elapseTime;
 	}
 	
-	public static  String[] insertionForString(int size,String stringarray[])
+	
+	/*
+	 * to sort the string elements using insertion sort
+	 */
+	public static  String[] insertionForString(String stringarray[],int size)
 	{
+	startTime = System.currentTimeMillis();	
+	System.out.println("this is insertion sort for string elements");
 	System.out.println("enter elements");
 	for(int i=0;i<size;i++)
 	{
@@ -185,12 +218,27 @@ public class Utility {
 		}
 	}
 	
+	System.out.println("sorted elements are ");
+	for(int i=0;i<size;i++)
+	{
+		System.out.print(stringarray[i]);
+		System.out.print(" ");
+	}
+	System.out.println();
+	stopTime = System.currentTimeMillis();	
+	elapseTime= (int) (stopTime - startTime);
+	timeArray[3] = elapseTime;
 	return stringarray;
 	}
 	
-	public static int[] bubbleForInt(int size,int intarray[])
-	{
 	
+	/*
+	 * to sort the integer elements using bubble sort
+	 */
+	public static int[] bubbleForInt(int intarray[],int size)
+	{
+	startTime = System.currentTimeMillis();	
+	System.out.println("this is bubble sort for integer elements");
 	System.out.println("enter integer elements");
 	for(int i=0; i<size; i++)
 	{
@@ -211,11 +259,28 @@ public class Utility {
 
 		}
 	}
+	
+	System.out.println("sorted elements are");
+	for(int i=0;i<size;i++)
+	{
+		System.out.print(intarray[i]);
+		System.out.print(" ");
+	}
+	System.out.println();
+	stopTime = System.currentTimeMillis();	
+	elapseTime= (int) (stopTime - startTime);
+	timeArray[4] = elapseTime;
 	return intarray;
 	}
 	
-	public static void bubbleForString(String stringarray[])
+	
+	/*
+	 * to sort the string elements using bubble sort
+	 */
+	public void bubbleForString(String stringarray[],int size)
 	{
+		startTime = System.currentTimeMillis();	
+		System.out.println("this is bubble sort for sring elements");
 		System.out.println("enter string elements");
 		for(int i=0; i<size; i++)
 		{
@@ -242,47 +307,41 @@ public class Utility {
 		for(int i=0; i<size; i++)
 		{
 			System.out.print(stringarray[i]+" ");
+			System.out.print(" ");
 		}
+		System.out.println();
+		stopTime = System.currentTimeMillis();	
+		elapseTime= (int) (stopTime - startTime);
+		timeArray[5] = elapseTime;
 	}
 	
 	
-	public static void switchChoice(int size,int intarray[], String stringarray[])
+	/*
+	 * to print the elapsed time between all methods calls.
+	 */
+	public void timePrint()
 	{
-		switch(choice)
+		System.out.println("elapse time for all the methods called \n is given below in descending order");
+		for(int i=timeArray.length-1; i>=0; i--)
 		{
-		case 1:
-			binarySearchForInt();
-			break;
-		case 2:
-			//binarySearchForString(stringarray);
-			break;
-		case 3:
-			//insertionForInt(intarray);
-			break;
-		case 4:
-			insertionForString(size,stringarray);
-			break;
-		case 5:
-			bubbleForInt(size,intarray);
-		case 6:
-			//bubbleForString(stringarray);
-			break;
-			
+			System.out.println(timeArray[i]+" miliseconds");
 		}
-
 	}
-	
-	
 	
 	public static void main(String[] args) 
 	{
-	System.out.println(" 1:binary search integer \n 2:binary search string \n 3:inserion sort integer\n 4:insertion sort string \n 5:bubble sort integer \n 6:bubble sort string");
-	choice = scanner.nextInt();
 	System.out.println("enter size of array");
 	size = scanner.nextInt();
 	int intarray[] = new int[size];
 	String stringarray[] = new String[size];
-	switchChoice(size,intarray,stringarray);
+	Utility u = new Utility();
+	u.binarySearchForInt(intarray,size);
+	u.binarySearchForString(stringarray,size);
+	u.insertionForInt(intarray,size);
+	u.insertionForString(stringarray,size);
+	u.bubbleForInt(intarray,size);
+	u.bubbleForString(stringarray,size);
+	u.timePrint();
 	}
 
 }

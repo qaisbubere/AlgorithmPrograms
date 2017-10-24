@@ -1,4 +1,3 @@
-
 /****************************************************************************** 
  *  Purpose: to create various methods in util class.
  *
@@ -18,11 +17,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Util {
-	static int count = 0, j, flag = 0,number,prime=0;
+	static int count = 0,flag = 0,number,prime=0;
 	static Scanner scanner = new Scanner(System.in);
 	
 	
-	//to determine whether the given string is anagram or not
+	/*
+	 * to determine whether the given string is anagram or not
+	 */
 	public static boolean anagram() {
 		boolean isAnagram = false;
 		Scanner scanner = new Scanner(System.in);
@@ -31,11 +32,14 @@ public class Util {
 		String string1 = scanner.nextLine();
 		System.out.println("enter second string");
 		String string2 = scanner.nextLine();
+		String space1 = string1.replaceAll(" ","");
+		String space2 = string2.replaceAll(" ","");
 		String lower1 = string1.toLowerCase();
 		String lower2 = string2.toLowerCase();
-		char[] array1 = string1.toCharArray();
-		char[] array2 = string2.toCharArray();
-
+		char[] array1 = space1.toCharArray();
+		char[] array2 = space2.toCharArray();
+		
+		
 		if (array1.length == array2.length) 
 		{
 			for (int i = 0; i < array1.length; i++) {
@@ -82,14 +86,10 @@ public class Util {
 		return isAnagram;
 	}
 
-	
-	
-	public static void palindrome() {
-	}
-
-	
-	
-	//to find out prime numbers between 0 and 1000
+		
+	/*
+	 * to find out prime numbers between 0 and 1000
+	 */
 	public static void primeNumber() {
 		boolean isprimeNumber = false;
 		System.out.println("prime numbers between 1 and 1000 are");
@@ -105,6 +105,10 @@ public class Util {
 		System.out.println(prime+" numbers are prime");
 	}
 
+	
+	/*
+	 * calculation of prime numbers
+	 */
 	public static boolean calculation(int number) 
 	{
 		boolean isPrime=false;
@@ -122,28 +126,27 @@ public class Util {
 			
 			else
 			return isPrime;
-			
-
 	}
 	
-
 	
-	//to convert farehneit to celcius and vice-versa
+	/*
+	 * to convert farehneit to celcius and vice-versa
+	 */
 	public static void temperatureConversion()
 	{
-			System.out.println("enter temperature in farenheit");
-			double mTemperatureFarenheit = scanner.nextDouble();
+		System.out.println("enter temperature in farenheit");
+		double mTemperatureFarenheit = scanner.nextDouble();
 			
-			double mToCelcius = ((mTemperatureFarenheit - 32) / 1.8);
-			double mToFarenheit = ((mToCelcius * 1.8) + 32);
-			System.out.println("temperature in celcius is " + mToCelcius);
-			System.out.println("temperature in farenheit is " +mToFarenheit);
+		double mToCelcius = ((mTemperatureFarenheit - 32) / 1.8);
+		double mToFarenheit = ((mToCelcius * 1.8) + 32);
+		System.out.println("temperature in celcius is " + mToCelcius);
+		System.out.println("temperature in farenheit is " +mToFarenheit);
 		
 	}
-	
-	
-	
-	//method to determine the day by accepting dates as input from user
+		
+	/*
+	 * method to determine the day by accepting dates as input from user
+	 */
 	public static void dayOfWeek(){
 		 int x , y0 , m0 , d0;
 		 
@@ -191,8 +194,9 @@ public class Util {
 	}
 	
 	
-	
-	//method to find out monthly payment to be paid towards loan taken
+	/*
+	 * method to find out monthly payment to be paid towards loan taken
+	 */
 	public static void monthlyPayment()
 	{
 		System.out.println("enter principal loan amount, years , and rate of interest");
@@ -209,8 +213,9 @@ public class Util {
 	}
 	
 	
-	
-	//method to find out square root of a number
+	/*
+	 * method to find out square root of a number
+	 */
 	public static void squareRoot()
 	{
 		System.out.println("enter a non-negative number");
@@ -221,23 +226,21 @@ public class Util {
 		 while (Math.abs(t - c/t) > epsilon*t) 
 			{
 		        t = (c/t + t) / 2.0;
-		        }
-
-		        
+		        }       
 		System.out.println(t);
 	}
 	
 	
-	
-	
-	//method for conversion of decimal to binary
+	/*
+	 * method for conversion of decimal to binary
+	 */
 	public static void binary()
 	{
 		System.out.println("enter a decimal number");
 		int decimal = scanner.nextInt();
 		int length = Integer.valueOf(decimal).toString().length();
 		int number = decimal;
-		int index =0,j=0,elementCounter=0,gap=0;
+		int index =0,elementCounter=0,gap=0;
 		int array[] =  new int[length*4];
 		
 		while(number > 0)
@@ -283,7 +286,9 @@ public class Util {
 	}
 	
 	
-	//to search a word from a file using binary search 
+	/*
+	 * to search a word from a file using binary search 
+	 */
 	public static void binarySearchFromFile() throws IOException
 	{
 		int elementFound=0;
@@ -337,7 +342,7 @@ public class Util {
 		int max = splitted.length - 1;
 		int mid = (min + max) /2;
 		
-		if((search.compareTo(splitted[max])<0) & (search.compareTo(splitted[min])>0))
+		if((search.compareTo(splitted[max])<=0) && (search.compareTo(splitted[min])>=0))
 		{
 			while(elementFound != 1)
 			{
@@ -368,11 +373,10 @@ public class Util {
 	}
 
 	
-	
-	
 	public static void main(String[] args) throws IOException {
-		System.out.println("1:anagram \n 2:palindrome \n 3:primenumber \n 4:temperature conversion \n 5:day of week \n 6:monthly payment \n 7:square root \n 8:binary \n 9:binary search from file");
+		System.out.println("1:anagram \n 2:primenumber \n 3:temperature conversion \n 4:day of week \n 5:monthly payment \n 6:square root \n 7:binary \n 8:binary search from file");
 		int choice = scanner.nextInt();
+		
 		switch(choice)
 		{
 		case 1:
@@ -383,34 +387,29 @@ public class Util {
 				System.out.println("not an anagram");
 			break;
 		case 2:
-			palindrome();
-			break;
-		case 3:
 			primeNumber();
 			break;
-		case 4:
+		case 3:
 			temperatureConversion();
 			break;
-		case 5:
+		case 4:
 			dayOfWeek();
 			break;
-		case 6:
+		case 5:
 			monthlyPayment();
 			break;
-		case 7:
+		case 6:
 			squareRoot();
 			break;
-		case 8:
+		case 7:
 			binary();
 			break;
-		case 9:
+		case 8:
 			binarySearchFromFile();
 			break;
 		default:
 			System.out.println("wrong choice");
 			break;
 		}
-	
-
 	}
 }

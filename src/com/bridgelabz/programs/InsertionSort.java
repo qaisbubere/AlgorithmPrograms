@@ -12,18 +12,14 @@ import java.util.Scanner;
 
 public class InsertionSort {
 	
-		static Scanner scanner= new Scanner(System.in);
+	static Scanner scanner= new Scanner(System.in);
 		
-		public static void main(String[] args) {
-		
+	public static void main(String[] args) 
+	{
 		System.out.println("enter size of array");
 		int size = scanner.nextInt();
 		String stringarray[] = new String[size];		
-		String stringarray1[] = Utility.insertionForString(size,stringarray);
-		for(int i =0;i<size;i++)
-		{
-		System.out.println(stringarray1[i]);
-		}
+		Utility.insertionForString(stringarray,size);		
 	}
 
 }

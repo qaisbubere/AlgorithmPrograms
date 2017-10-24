@@ -13,18 +13,13 @@ import java.util.Scanner;
 
 public class Bubblesort {
 
-		static Scanner scanner = new Scanner(System.in);
+	static Scanner scanner = new Scanner(System.in);
 
-		public static void main(String args[])
-		{
+	public static void main(String args[])
+	{
 		System.out.println("enter size of array");
 		int size = scanner.nextInt();
-		int intarray[] = new int[size];
-		int intarray1[] = Utility.bubbleForInt(size,intarray);
-		System.out.println("sorted elements are ");
-		for(int i=0; i<size; i++)
-		{
-			System.out.print(intarray1[i]+" ");
-		}
-		}
+		int intArray[] = new int[size];
+		Utility.bubbleForInt(intArray,size);	
+	}
 }
